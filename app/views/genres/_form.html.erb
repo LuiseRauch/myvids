@@ -1,0 +1,4 @@
+<div class="form-group">
+  <%= f.label :genres %>
+  <%= f.text_field :genres, class: 'form-control', placeholder: "Enter genres (separated by commas)", value: genres.map(&:name).join(', ') %>
+</div>

@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1>Genre: <%= @genre.name %></h1>
+    <% @genre.videos.each do |video| %>
+      <div>
+        Movie: <%= link_to video.title, video %>
+      </div>
+    <% end %>
+  </div>
+</div>

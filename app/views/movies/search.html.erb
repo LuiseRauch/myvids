@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>What are you looking for?</h1>
+  <form>
+    <%= form_tag("/search", method: "get") do %>
+    <div class="form-group">
+      <%= label_tag(:title, "title:") %>
+      <%= text_field_tag(:title) %>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:genre, "genre:") %>
+      <%= text_field_tag(:genre) %>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:actor, "actor/actress:") %>
+      <%= text_field_tag(:actor) %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag("Search") %>
+    </div>
+    <% end %>
+  </form>
+</div>

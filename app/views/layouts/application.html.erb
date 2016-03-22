@@ -10,7 +10,8 @@
 <body>
   <div class="container">
     <ul class="nav nav-tabs">
-      <li><%= link_to "Home", welcome_index_path %></li>
+      <li><%= link_to "Welcome", root_path %></li>
+      <li><%= link_to "Movies", search_path %></li>
       <div class="pull-right user-info">
         <% if user_signed_in? %>
         <%= link_to current_user.username, user_path(current_user) %> |
