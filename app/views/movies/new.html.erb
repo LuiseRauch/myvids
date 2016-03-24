@@ -1,6 +1,29 @@
-<h1>Movies#new</h1>
-<p>Find me in app/views/movies/new.html.erb</p>
-
-<div class="form-group">
-  <%= render partial: 'genres/form', locals: { f: f, genres: @video.genres } %>
+<div class="row">
+  <div class="col-md-4">
+    <h1>New Video</h1>
+  </div>
+  <div class="col-md-8">
+    <%= form_for @video, :as => :post, :url => movies_path(@video)  do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter video title" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :language %>
+        <%= f.text_field :language, class: 'form-control', placeholder: "Enter video language" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :year %>
+        <%= f.text_field :year, class: 'form-control', placeholder: "Enter video year" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :synopsis %>
+        <%= f.text_area :synopsis, rows: 8, class: 'form-control', placeholder: "Enter video synopsis" %>
+      </div>
+      <div class="form-group">
+        <%= render partial: 'genres/form', locals: { f: f, season: @season, genres: @video.genres } %>
+      </div>
+      <%= f.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+  </div>
 </div>

@@ -1,6 +1,8 @@
-<h1>Movies#edit</h1>
-<p>Find me in app/views/movies/edit.html.erb</p>
-
-<div class="form-group">
-  <%= render partial: 'genres/form', locals: { f: f, labels: @video.genres } %>
+<div class="row">
+  <div class="col-md-4">
+    <h1>Edit Videos</h1>
+  </div>
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { season: @video.season, video: @video } %>
+  </div>
 </div>

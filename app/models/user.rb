@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :favorites, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -25,5 +26,9 @@ class User < ActiveRecord::Base
      conditions[:email].downcase! if conditions[:email]
      where(conditions.to_hash).first
    end
+  end
+
+  def favorite_for(video)
+    favorites.where(video_id: video.id).first
   end
 end

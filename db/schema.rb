@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322143621) do
+ActiveRecord::Schema.define(version: 20160323113152) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "video_id"
+    t.integer  "series_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["series_id"], name: "index_favorites_on_series_id"
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
+  add_index "favorites", ["video_id"], name: "index_favorites_on_video_id"
 
   create_table "genres", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "series_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "seasons", ["series_id"], name: "index_seasons_on_series_id"
+
+  create_table "series", force: :cascade do |t|
+    t.string   "title"
+    t.text     "synopsis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,6 +86,9 @@ ActiveRecord::Schema.define(version: 20160322143621) do
     t.text     "synopsis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "season_id"
   end
+
+  add_index "videos", ["season_id"], name: "index_videos_on_season_id"
 
 end

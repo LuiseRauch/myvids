@@ -1,0 +1,9 @@
+<div class="row text-center">
+  <h2>Favorited Movies</h2>
+  <% if current_user %>
+    <%= render partial: 'favorites/favorite', locals: { video: video } %>
+    <% end %>
+</div>
+<div class="row text-center">
+  <h2>Favorited Series</h2>
+</div>
