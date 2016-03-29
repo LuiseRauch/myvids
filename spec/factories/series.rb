@@ -1,7 +1,8 @@
+include RandomData
+
 FactoryGirl.define do
   factory :series do
-    title "MyString"
-synopsis "MyText"
+    title RandomData.random_name
+    synopsis RandomData.random_sentence
   end
-
 end

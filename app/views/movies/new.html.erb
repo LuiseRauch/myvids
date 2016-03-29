@@ -3,7 +3,7 @@
     <h1>New Video</h1>
   </div>
   <div class="col-md-8">
-    <%= form_for @video, :as => :post, :url => movies_path(@video)  do |f| %>
+    <%= form_for @video, :url => movies_path(@video) do |f| %>
       <div class="form-group">
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control', placeholder: "Enter video title" %>

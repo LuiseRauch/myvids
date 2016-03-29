@@ -1,9 +1,10 @@
+include RandomData
+
 FactoryGirl.define do
   factory :video do
-    title "MyString"
-language 1
-year 1
-synopsis "MyText"
+    title RandomData.random_name
+    language 1
+    year 1
+    synopsis RandomData.random_sentence
   end
-
 end

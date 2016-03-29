@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users
 
   resources :genres, only: [:show]
 
   resources :movies
     resources :favorites, only: [:create, :destroy]
-  get 'search' => 'movies#search'
+  get 'search' => 'movies#search'#, as: :search_movie
+  # search_movie_path
   get 'new' => 'movies#new'
 
-  devise_for :users
   resources :users, only: [:show]
 
   get 'welcome/index'
