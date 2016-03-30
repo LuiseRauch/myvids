@@ -1,8 +1,9 @@
+<h1>Edit Videos</h1>
 <div class="row">
-  <div class="col-md-4">
-    <h1>Edit Videos</h1>
-  </div>
   <div class="col-md-8">
-    <%= render partial: 'form', locals: { season: @video.season, video: @video } %>
+    <%#= render partial: 'form', locals: { season: @video.season, video: @video } %>
+    <%= form_for @video, :url => movie_path(@video) do |f| %>
+      <%= render partial: 'form', locals: { f: f, video: @video } %>
+    <% end %>
   </div>
 </div>

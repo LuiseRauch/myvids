@@ -5,7 +5,8 @@
       <div class="media">
         <div class="media-body">
           <h4 class="media-heading">
-            <%= link_to video.title, video %>
+            <%= link_to video.title, movie_path(video), method: :get %>
+            <%= render partial: "genres/list", locals: { genres: video.genres } %>
           </h4>
           <small>
             <%= video.synopsis %>

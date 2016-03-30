@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
   end
 
   def search
+    # params[:title]
+    # params[:actor]
   end
 
   def new
@@ -40,10 +42,21 @@ class MoviesController < ApplicationController
       @video.genres = Genre.update_genres(params[:video][:genres])
       flash[:notice] = "Video was updated."
       redirect_to movie_path(@video)
-      # redirect_to 'localhost:3000/movies/1'
     else
       flash.now[:alert] = "There was an error saving the video. Please try again."
       render :edit
+    end
+  end
+
+  def destroy
+    @video = Video.find(params[:id])
+
+    if @video.destroy
+      flash[:notice] = "\"#{@video.title}\" was deleted successfully."
+      redirect_to movies_path
+    else
+      flash.now[:alert] = "There was an error deleting the video."
+      render :show
     end
   end
 

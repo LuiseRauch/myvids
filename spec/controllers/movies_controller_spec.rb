@@ -116,12 +116,11 @@ RSpec.describe MoviesController, type: :controller do
       #   expect{ post :create, video: {title: RandomData.random_word , year: 2007, synopsis: RandomData.random_sentence} }.to change (Video,:count).by(1)
       # end
       it "assigns Video.last to @video" do
-        post :create, video: {title: RandomData.random_word, year: 2007, synopsis: RandomData.random_sentence}
+        post :create, video: {title: RandomData.random_word, language: :english, year: 2007, synopsis: RandomData.random_sentence}
         expect(assigns(:video)).to eq Video.last
       end
       it "redirects to the new video" do
         post :create, video: {title: RandomData.random_word, year: 2007, synopsis: RandomData.random_sentence}
-        # expect(response).to redirect_to Video.last
         expect(response).to redirect_to movie_path(Video.last)
       end
     end
@@ -134,6 +133,19 @@ RSpec.describe MoviesController, type: :controller do
       it "renders the #edit view" do
         get :edit, id: my_movie.id
         expect(response).to render_template :edit
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "deletes the video" do
+        delete :destroy, id: my_movie.id
+        count = Video.where({id: my_movie.id}).size
+        expect(count).to eq 0
+      end
+
+      it "redirects to video index" do
+        delete :destroy, id: my_movie.id
+        expect(response).to redirect_to movies_path
       end
     end
   end
