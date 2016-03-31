@@ -11,13 +11,13 @@
   <div class="container">
     <ul class="nav nav-tabs">
       <li><%= link_to "Welcome", root_path %></li>
-      <li><%= link_to "Search", search_path %></li>
       <% if user_signed_in? %>
-        <% if current_user.admin? %>
-          <li><%= link_to "Add New", new_path %></li>
-          <li><%= link_to "See All", movies_path %></li>
+        <li><%= link_to "Search", search_path %></li>
+        <li><%= link_to "See All", movies_path %></li>
+          <% if current_user.admin? %>
+            <li><%= link_to "Add New", new_path %></li>
           <% end %>
-        <% end %>
+      <% end %>
       <div class="pull-right user-info">
         <% if user_signed_in? %>
         <%= link_to current_user.username, user_path(current_user) %> |

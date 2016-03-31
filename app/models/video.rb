@@ -12,4 +12,5 @@ class Video < ActiveRecord::Base
   validates :language, inclusion: { in: ['english', 'german'] }, presence: true
 
   enum language: [:english, :german]
+
 end

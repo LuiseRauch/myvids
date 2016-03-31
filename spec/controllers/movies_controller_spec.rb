@@ -64,6 +64,7 @@ RSpec.describe MoviesController, type: :controller do
 
   context "admin" do
     before do
+      sign_in my_user
       my_user.update_attributes(admin: true)
     end
 
@@ -120,7 +121,7 @@ RSpec.describe MoviesController, type: :controller do
         expect(assigns(:video)).to eq Video.last
       end
       it "redirects to the new video" do
-        post :create, video: {title: RandomData.random_word, year: 2007, synopsis: RandomData.random_sentence}
+        post :create, video: {title: RandomData.random_word, language: :english, year: 2007, synopsis: RandomData.random_sentence}
         expect(response).to redirect_to movie_path(Video.last)
       end
     end

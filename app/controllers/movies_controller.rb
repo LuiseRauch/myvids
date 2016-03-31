@@ -15,11 +15,13 @@ class MoviesController < ApplicationController
   def new
     # @season = Season.find(params[:season_id])
     @video = Video.new
+    authorize @video
   end
 
   def create
     # @season = Season.find(params[:season_id])
     @video = Video.new(video_params)
+    authorize @video
 
     if @video.save
       @video.genres = Genre.update_genres(params[:video][:genres])
@@ -32,6 +34,7 @@ class MoviesController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
+    authorize @video
   end
 
   def update
@@ -50,6 +53,7 @@ class MoviesController < ApplicationController
 
   def destroy
     @video = Video.find(params[:id])
+    authorize @video
 
     if @video.destroy
       flash[:notice] = "\"#{@video.title}\" was deleted successfully."

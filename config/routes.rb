@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   resources :genres, only: [:show]
 
-  resources :movies
+  resources :movies do
     resources :favorites, only: [:create, :destroy]
+  end
+
   get 'search' => 'movies#search'#, as: :search_movie
   # search_movie_path
   get 'new' => 'movies#new'

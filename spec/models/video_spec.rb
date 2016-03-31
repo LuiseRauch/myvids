@@ -48,5 +48,4 @@ RSpec.describe Video, type: :model do
   #     expect(episode).to respond_to(:synopsis)
   #   end
   # end
-
 end

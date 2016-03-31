@@ -28,7 +28,10 @@ class User < ActiveRecord::Base
    end
   end
 
-  def favorite_for(video)
-    favorites.where(video_id: video.id).first
+  def favorite(video)
+    favorites.where(movie_id: video.id).first
+  end
+  def favorite(series)
+    favorites.where(series_id: series.id).first
   end
 end

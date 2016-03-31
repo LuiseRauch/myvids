@@ -17,18 +17,18 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#favorite_for(video)" do
+  describe "#favorite(video)" do
     before do
-      @video = Video.create!(title: "Movie Title")
+      @video = Video.create!(title: "Movie Title", language: :english, year: 2014, synopsis: "Test text, Test text")
     end
 
     it "returns `nil` if the user has not favorited the post" do
-      expect(user.favorite_for(@video)).to be_nil
+      expect(user.favorite(@video)).to be_nil
     end
 
     it "returns the appropriate favorite if it exists" do
       favorite = user.favorites.where(video: @video).create
-      expect(user.favorite_for(@video)).to eq(favorite)
+      expect(user.favorite(@video)).to eq(favorite)
     end
   end
 end
