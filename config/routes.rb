@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :users, except: [:new, :create]
 
   resources :genres, only: [:show]
 
@@ -10,8 +11,6 @@ Rails.application.routes.draw do
   get 'search' => 'movies#search'#, as: :search_movie
   # search_movie_path
   get 'new' => 'movies#new'
-
-  resources :users, only: [:show]
 
   get 'welcome/index'
 

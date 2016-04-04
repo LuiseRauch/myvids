@@ -1,0 +1,24 @@
+<h1>Edit User</h1>
+<%= form_for @user, :url => user_path(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@user.errors.count, "error") %>.</h4>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_group_tag(@user.errors[:email]) do %>
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control', placeholder: "Enter email" %>
+  <% end %>
+  <%= form_group_tag(@user.errors[:approved]) do %>
+    <%= f.label :approved %>
+    <%= f.check_box :approved %>
+  <% end %>
+  <div class="form-group">
+    <%= f.submit "Save", class: 'btn btn-success' %>
+  </div>
+<% end %>

@@ -1,10 +1,31 @@
 <div class="row text-center">
   <h2>Favorited Movies</h2>
-  <!-- <%# if current_user %>
-    <%#= render partial: 'favorites/favorite', locals: { video: video } %>
-    <%# end %> -->
+    <% @user_favorited_videos.each do | video | %>
+      <div class="col-md-3">
+        <%= link_to video.title, movie_path(video), method: :get %><br />
+        <%= render partial: 'favorites/favorite', locals: { video: video } %>
+      </div>
+    <% end %>
 </div>
+
+
 <div class="row text-center">
   <h2>Favorited Series</h2>
 </div>
-Age:
+
+<% if current_user.admin? %>
+<div class="row">
+  <div class="col-md-8">
+      <h4>Manage all Users</h4>
+      <%= link_to "Myvids Users", users_path %></li>
+    </div>
+  </div>
+<% end %>
+<br />
+
+<div class="row">
+  <div class="col-md-8">
+    <h4>My Data</h4>
+    <p>Birthdate:</p>
+  </div>
+</div>
