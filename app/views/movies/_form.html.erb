@@ -1,30 +1,79 @@
-<% if video.errors.any? %>
-  <div class="alert alert-danger">
-    <h4><%= pluralize(video.errors.count, "error") %>.</h4>
-    <ul>
-      <% video.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<%= form_group_tag(video.errors[:title]) do %>
-  <%= f.label :title %>
-  <%= f.text_field :title, class: 'form-control', placeholder: "Enter video title" %>
-<% end %>
-<%= form_group_tag(video.errors[:language]) do %>
-  <%= f.label :language %>
-  <%= f.text_field :language, class: 'form-control', placeholder: "Enter video language" %>
-<% end %>
-<%= form_group_tag(video.errors[:year]) do %>
-  <%= f.label :year %>
-  <%= f.text_field :year, class: 'form-control', placeholder: "Enter video year" %>
-<% end %>
-<%= form_group_tag(video.errors[:synopsis]) do %>
-  <%= f.label :synopsis %>
-  <%= f.text_area :synopsis, rows: 8, class: 'form-control', placeholder: "Enter video synopsis" %>
-<% end %>
-<div class="form-group">
-  <%= render partial: 'genres/form', locals: { f: f, season: @season, genres: @video.genres } %>
+<div class="field form-group">
+    <%= label_tag "..is part of a Series?" %>
+    <%= check_box_tag "chkSelect", "Check/Uncheck me", false %>
 </div>
-<%= f.submit "Save", class: 'btn btn-success' %>
+
+<div class="is_part_of_series">
+  <%= form_tag seasons_path, :id=>'series_change', method: :get, remote: true do %>
+    <div class="form-group c-select">
+      <%= label_tag 'series', 'Select Series' %>
+      <%= select_tag 'series', options_from_collection_for_select(Series.all, :id, :title), include_blank: true, onchange: "$('#series_change').submit();", class: "form-control" %>
+    </div>
+  <% end %>
+</div>
+
+  <%= form_for video, :url => movies_path(video) do |f| %>
+    <% if video.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(video.errors.count, "error") %>.</h4>
+        <ul>
+          <% video.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="is_part_of_series">
+      <div id='is_part_of_season'>
+        <%= form_group_tag(video.errors[:season_id]) do %>
+          <%= f.label :season_id %>
+          <%= f.select :season_id, [], {}, include_blank: true, class: "form-control" %>
+        <% end %>
+      </div>
+
+      <div id='new-series-fields'>
+        <%= f.fields_for :season, f.object.build_season do |season_form| %>
+          <%= season_form.fields_for :series, season_form.object.build_series do |series_form| %>
+            <div class="form-group">
+                <%= series_form.label :title, 'New Series' %>
+                <%= series_form.text_field :title, class: 'form-control', placeholder: "Enter series title" %>
+            </div>
+            <div class="form-group">
+                <%= series_form.label :synopsis, 'New Series Synopsis' %>
+                <%= series_form.text_area :synopsis, class: 'form-control', placeholder: "Enter series synopsis" %>
+            </div>
+          <% end %>
+
+          <div id='new-season-field'>
+            <div class="form-group">
+              <%= season_form.label :number, 'New Season' %>
+              <%= season_form.number_field :number, class: 'form-control', placeholder: "Enter season number" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  <%= form_group_tag(video.errors[:title]) do %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter video title" %>
+  <% end %>
+  <%= form_group_tag(video.errors[:language]) do %>
+    <%= f.label :language %>
+    <%= f.text_field :language, class: 'form-control', placeholder: "Enter video language" %>
+  <% end %>
+  <%= form_group_tag(video.errors[:year]) do %>
+    <%= f.label :year %>
+    <%= f.text_field :year, class: 'form-control', placeholder: "Enter video year" %>
+  <% end %>
+  <%= form_group_tag(video.errors[:synopsis]) do %>
+    <%= f.label :synopsis %>
+    <%= f.text_area :synopsis, rows: 8, class: 'form-control', placeholder: "Enter video synopsis" %>
+  <% end %>
+
+  <div class="form-group">
+    <%= render partial: 'genres/form', locals: { f: f, genres: video.genres } %>
+  </div>
+  <%= f.submit "Save", class: 'btn btn-success' %>
+<% end %>

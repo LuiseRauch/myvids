@@ -4,6 +4,8 @@ class Video < ActiveRecord::Base
   has_many :genres, through: :tags
   has_many :favorites, dependent: :destroy
 
+  accepts_nested_attributes_for :season, reject_if: proc { |attributes| attributes[:number].blank? }
+
   validates :title, length: { minimum: 1, maximum: 100 }, presence: true
   # validates :year, length: { minimum: 4, maximum: 4 }, presence: true
   validates :year, numericality: { greater_than: 999 }, presence: true

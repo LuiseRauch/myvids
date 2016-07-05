@@ -13,19 +13,27 @@ class MoviesController < ApplicationController
   end
 
   def new
-    # @season = Season.find(params[:season_id])
     @video = Video.new
+    @season = Season.new
+    @series = Series.new
     authorize @video
   end
 
   def create
-    # @season = Season.find(params[:season_id])
+    # raise params.inspect
+    # if params[:video][:series].present?
+    #   @series = Series.create(params[:video][:series])
+    # end
+    # if params[:video][:season].present?
+    #   @season = @series.seasons.create(params[:video][:season])
+    # end
     @video = Video.new(video_params)
+    # @video.season = @season
     authorize @video
 
     if @video.save
       @video.genres = Genre.update_genres(params[:video][:genres])
-      redirect_to movie_path(@video), notice: "Video was saved successfully."
+      redirect_to movie_path(@video), notice: "Movie was saved successfully."
     else
       flash.now[:alert] = "Error creating Movie. Please try again."
       render :new
@@ -67,6 +75,6 @@ class MoviesController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:title, :language, :year, :synopsis)
+    params.require(:video).permit(:title, :language, :year, :synopsis, :season_id, season_attributes: [:number, series_attributes: [:title, :synopsis]])
   end
 end

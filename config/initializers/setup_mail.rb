@@ -4,9 +4,9 @@ if Rails.env.development? || Rails.env.production?
     address: 'smtp.mailgun.org',
     port: 587,
     authentication: :plain,
-    content_type: 'text/html'
+    content_type: 'text/html',
     user_name: ENV['MAILGUN_SMTP_LOGIN'],
-    password: ENV['MAILGUN_SMTP_LOGIN']
+    password: ENV['MAILGUN_SMTP_LOGIN'],
     domain: ENV['MAILGUN_SMTP_DOMAIN']
   }
   # ActionMailer::Base.smtp_settings = {

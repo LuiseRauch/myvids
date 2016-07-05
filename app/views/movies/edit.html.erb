@@ -3,7 +3,7 @@
   <div class="col-md-8">
     <%#= render partial: 'form', locals: { season: @video.season, video: @video } %>
     <%= form_for @video, :url => movie_path(@video) do |f| %>
-      <%= render partial: 'form', locals: { f: f, video: @video } %>
+      <%= render partial: 'form', locals: { f: f, video: @video , season: @season, series: @series} %>
     <% end %>
   </div>
 </div>

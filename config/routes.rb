@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, except: [:new, :create]
 
+  resources :seasons, only: [:index, :show, :new, :edit]
+
+  resources :series do
+    resources :favorites, only: [:create, :destroy]
+  end
+  get 'series/search'
+
   resources :genres, only: [:show]
 
   resources :movies do

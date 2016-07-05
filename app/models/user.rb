@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
            format: { with: EMAIL_REGEX }
 
   scope :find_all_by_approved, -> (approval_status) { where(approved: approval_status) }
+  scope :admin, -> { where(admin: true) }
 
   def send_admin_mail
     AdminMailer.new_user_waiting_for_approval(self).deliver

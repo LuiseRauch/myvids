@@ -1,0 +1,10 @@
+// alert('<%= @series.title %>')
+// TODO: change this from an alert to adding the seasons to a dropdown in the form
+
+ <% if @series.valid? %>
+    $('#is_part_of_season').show();
+ <% end %>
+
+ // $('#is_part_of_season').html('<%#= escape_javascript render "season_id_form", locals: {series: @series}');
+<%# str = @series.seasons.map {|season| "<option>#{season.number}</option>"}.join('') %>
+// html('<%#= str %>')

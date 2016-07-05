@@ -27,25 +27,25 @@ RSpec.describe Video, type: :model do
 
   describe "attributes for movie" do
     it "should respond to title" do
-      expect(movie).to respond_to(:title)
+      expect(movie).to have_attributes(:title)
     end
     it "should respond to language" do
-      expect(movie).to respond_to(:language)
+      expect(movie).to have_attributes(:language)
     end
     it "should respond to year" do
-      expect(movie).to respond_to(:year)
+      expect(movie).to have_attributes(:year)
     end
     it "should respond to synopsis" do
-      expect(movie).to respond_to(:synopsis)
+      expect(movie).to have_attributes(:synopsis)
     end
   end
 
   # describe "attributes for episode" do
   #   it "should respond to title" do
-  #     expect(episode).to respond_to(:title)
+  #     expect(episode).to have_attributes(:title)
   #   end
   #   it "should respond to synopsis" do
-  #     expect(episode).to respond_to(:synopsis)
+  #     expect(episode).to have_attributes(:synopsis)
   #   end
   # end
 end
